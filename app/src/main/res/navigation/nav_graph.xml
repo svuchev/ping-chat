@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/FirstFragment">
+
+    <fragment
+        android:id="@+id/FirstFragment"
+        android:name="com.stoyanvuchev.pingchat.presentation.FirstFragment"
+        android:label="@string/app_name"
+        tools:layout="@layout/fragment_first" >
+
+        <action
+            android:id="@+id/action_FirstFragment_to_MessagesFragment"
+            app:destination="@id/MessagesFragment" />
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/MessagesFragment"
+        android:name="com.stoyanvuchev.pingchat.presentation.messages.MessagesFragment"
+        android:label="@string/messages_fragment_label"
+        tools:layout="@layout/fragment_messages" >
+
+        <action
+            android:id="@+id/action_MessagesFragment_to_FirstFragment"
+            app:destination="@id/FirstFragment" />
+
+    </fragment>
+
+</navigation>
