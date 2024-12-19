@@ -48,7 +48,7 @@ public class ServerService extends Service {
     private class Server {
 
         private final static String TAG = "ServerTag";
-        private final static int PORT = 11221;
+        private final static int PORT = 9090;
         private ServerSocket serverSocket;
         private final ExecutorService executorService; // Used for handling multiple clients.
 
@@ -62,12 +62,14 @@ public class ServerService extends Service {
                 serverSocket = new ServerSocket(PORT);
                 System.out.println("Server started. Waiting for clients ...");
 
-                while (!serverSocket.isClosed()) {
+                while (true) {
 
                     Socket clientSocket = serverSocket.accept();
                     System.out.println("Client connected: " + clientSocket.getInetAddress());
 
                     executorService.execute(new Server.ClientHandler(clientSocket));
+
+                    Thread.sleep(10);
 
                 }
 

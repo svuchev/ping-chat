@@ -17,34 +17,37 @@ public class Client {
     private PrintWriter output;
 
     public void connectToServer(String serverAddress, int port) {
-        try {
+        // Starting a Thread to listen for messages from the server.
+        new Thread(() -> {
+            try {
 
-            socket = new Socket(serverAddress, port);
-            input = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-            output = new PrintWriter(socket.getOutputStream(), true);
+                socket = new Socket(serverAddress, port);
+                input = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+                output = new PrintWriter(socket.getOutputStream(), true);
 
-            // Starting a Thread to listen for messages from the server.
-            new Thread(() -> {
-                try {
-
-                    String msg;
-                    while ((msg = input.readLine()) != null) {
-                        System.out.println("Server: " + msg);
+                String msg;
+                while (true) {
+                    msg = input.readLine();
+                    if (msg != null) {
+                        System.out.println(TAG + ": Message From Server: " + msg);
                     }
-
-                } catch (IOException e) {
-                    Log.d(TAG, Objects.requireNonNull(e.getMessage()));
+                    Thread.sleep(10);
                 }
-            }).start();
 
-        } catch (IOException e) {
-            Log.d(TAG, Objects.requireNonNull(e.getMessage()));
-        }
+            } catch (IOException e) {
+                Log.d(TAG, Objects.requireNonNull(e.getMessage()));
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
+        }).start();
     }
 
     public void sendMessage(String message) {
         if (output != null) {
-            output.println(message);
+            output.write(message);
+            output.flush();
+        } else {
+            Log.e(TAG, "Error: Cannot send a message: The output doesn't exist!");
         }
     }
 

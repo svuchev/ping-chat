@@ -98,9 +98,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:autofillHints=""
-            android:hint="e.g. 123123"
+            android:hint="e.g. 9090"
             android:inputType="number"
-            android:text="11221"
+            android:text="9090"
             android:maxLength="5"
             android:maxLines="1"
             tools:ignore="HardcodedText" />

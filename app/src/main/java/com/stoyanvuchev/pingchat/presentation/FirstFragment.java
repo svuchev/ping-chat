@@ -48,7 +48,7 @@ public class FirstFragment extends Fragment {
 
         // Display the Server IPv4 Address & Port.
         String ipv4Address = IPAddressUtil.getLocalIPv4Address();
-        final int PORT = 11221;
+        final int PORT = 9090;
         binding.serverIPAddressTextView.setText(ipv4Address + " : " + PORT);
 
     }

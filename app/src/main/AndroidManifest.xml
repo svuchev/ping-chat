@@ -16,8 +16,7 @@
         android:enableOnBackInvokedCallback="true"
         android:theme="@style/Theme.PingChat"
         android:usesCleartextTraffic="false"
-        android:windowSoftInputMode="adjustResize"
-        tools:targetApi="tiramisu">
+        android:windowSoftInputMode="adjustResize">
 
         <activity
             android:name=".presentation.MainActivity"
@@ -29,6 +28,14 @@
             </intent-filter>
 
         </activity>
+
+        <service
+            android:name=".framework.service.ServerService"
+            android:exported="false" />
+
+        <receiver
+            android:name=".framework.receiver.MessagesReceiver"
+            android:exported="false" />
 
     </application>
 
